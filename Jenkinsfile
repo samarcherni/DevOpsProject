@@ -4,7 +4,7 @@ pipeline {
         stage ("Clonning project") {
             steps {
                 echo "Pulling .... "
-                git  url: 'https://github.com/samarcherni/projet-DevOps.git', credentialsId: "GITHUB_CREDENTIALS", branch: "Gestion_Fournisseur"
+                git  url: 'https://github.com/samarcherni/DevOpsProject.git', credentialsId: "GITHUB_CREDENTIALS", branch: "Gestion_Fournisseur"
             }
         }
         stage ("Build and clean") {
