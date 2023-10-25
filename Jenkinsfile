@@ -7,7 +7,7 @@ pipeline {
       steps {
         git branch: 'GestionStock',
           credentialsId: 'aziz',
-          url :'https://github.com/samarcherni/projet-DevOps.git'
+          url :'https://github.com/samarcherni/DevOpsProject.git'
       }
      
     }
