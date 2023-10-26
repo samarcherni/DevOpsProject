@@ -28,5 +28,11 @@ pipeline {
         sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=Azizazizaziz94'
       }
     }
+        stage('Test') {
+            steps {
+                // Add your test commands here
+                sh 'mvn test'  // Replace with your actual test command
+            }
+        }
     }
 }
