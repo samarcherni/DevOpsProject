@@ -25,5 +25,12 @@ pipeline {
                 }
             }
         }
+         stage('Maven deploy with Nexus') {
+            steps {
+                script {
+                    sh "mvn deploy -DskipTests"
+                }
+            }
+        }
     }
 }
