@@ -23,6 +23,11 @@ pipeline {
                 sh 'mvn compile'
             }
         }
+        stage('Test') {
+            steps {
+                sh 'mvn test' 
+            }
+        }
         stage('Quality test SONARQUBE') {
             steps {
         sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=Azizazizaziz94'
@@ -33,11 +38,6 @@ pipeline {
                 sh 'mvn deploy'
             }
         }
-        stage('Test') {
-            steps {
-                // Add your test commands here
-                sh 'mvn test'  // Replace with your actual test command
-            }
-        }
+        
     }
 }
