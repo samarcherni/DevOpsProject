@@ -37,16 +37,16 @@ public class FactureTest {
         facture1.setIdFacture(1L);
         facture1.setMontantFacture(10.0f);
         facture1.setMontantRemise(5.0f);
-        facture1.setDateCreationFacture(new Date(2023,10,05));
-        facture1.setDateDerniereModificationFacture(new Date(2023,10,10));
+        facture1.setDateCreationFacture(new Date(2023,8,05));
+        facture1.setDateDerniereModificationFacture(new Date(2023,8,10));
         facture1.setArchivee(false);
 
         Facture facture2= new Facture();
         facture2.setIdFacture(2L);
         facture2.setMontantFacture(20.0f);
         facture2.setMontantRemise(10.0f);
-        facture2.setDateCreationFacture(new Date(2023,9,30));
-        facture2.setDateDerniereModificationFacture(new Date(2023,10,06));
+        facture2.setDateCreationFacture(new Date(2023,9,10));
+        facture2.setDateDerniereModificationFacture(new Date(2023,9,12));
         facture2.setArchivee(true);
 
         expectedFactures.add(facture1);
