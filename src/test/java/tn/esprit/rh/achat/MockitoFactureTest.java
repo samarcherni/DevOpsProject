@@ -4,14 +4,12 @@ package tn.esprit.rh.achat;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import tn.esprit.rh.achat.entities.Facture;
 import tn.esprit.rh.achat.repositories.FactureRepository;
@@ -27,7 +25,7 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {StockServiceImpl.class})
-public class MockitoTestFacture {
+public class MockitoFactureTest {
 
     @InjectMocks
     private FactureServiceImpl factureService;
