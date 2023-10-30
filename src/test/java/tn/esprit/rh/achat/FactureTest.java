@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ContextConfiguration(classes = {FactureServiceImpl.class})
-@ExtendWith(SpringExtension.class)
+//@ExtendWith(SpringExtension.class)
 public class FactureTest {
 
     @MockBean
