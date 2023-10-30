@@ -24,7 +24,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {StockServiceImpl.class})
+@ContextConfiguration(classes = {FactureServiceImpl.class})
 public class MockitoFactureTest {
 
     @InjectMocks
