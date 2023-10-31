@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -43,6 +44,15 @@ public class CategorieProduitTest {
         List<CategorieProduit> result = categorieProduitService.retrieveAllCategorieProduits();
         assertEquals(categorieProduits, result);
     }
+
+    @Test
+    void testDeleteCategorieProduit() {
+        Long idToDelete = 1L;
+        categorieProduitService.deleteCategorieProduit(idToDelete);
+        Mockito.verify(categorieProduitRepository).deleteById(idToDelete);
+    }
+
+
 
 
 
