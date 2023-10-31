@@ -16,11 +16,13 @@ import tn.esprit.rh.achat.services.CategorieProduitServiceImpl;
 
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.any;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = {CategorieProduitServiceImpl.class})
@@ -45,12 +47,28 @@ public class CategorieProduitTest {
         assertEquals(categorieProduits, result);
     }
 
+
+    @Test
+    void testAddCategorieProduit() {
+        CategorieProduit categorieProduit = new CategorieProduit(1L,"se816sd","decoration",new HashSet<>());
+        when(categorieProduitRepository.save(any(CategorieProduit.class))).thenReturn(categorieProduit);
+        CategorieProduit resultat = categorieProduitService.addCategorieProduit(categorieProduit);
+        assertNotNull(resultat);
+        assertEquals(categorieProduit, resultat);
+    }
+
     @Test
     void testDeleteCategorieProduit() {
         Long idToDelete = 1L;
         categorieProduitService.deleteCategorieProduit(idToDelete);
         Mockito.verify(categorieProduitRepository).deleteById(idToDelete);
     }
+
+
+
+
+
+
 
 
 
