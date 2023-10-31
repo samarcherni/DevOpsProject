@@ -17,6 +17,11 @@ pipeline {
                 sh "mvn compile"
             }
         }
+        stage ("Deploy") {
+            steps {
+                sh "mvn deploy"
+            }
+        }
 
         stage ("Quality test Sonar") {
             steps {
