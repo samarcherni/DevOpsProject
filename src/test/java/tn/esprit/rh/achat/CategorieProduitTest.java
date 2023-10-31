@@ -18,6 +18,7 @@ import tn.esprit.rh.achat.services.CategorieProduitServiceImpl;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -72,6 +73,18 @@ public class CategorieProduitTest {
         assertNotNull(result);
         assertEquals(categorieProduit, result);
     }
+
+    @Test
+    void testRetrieveCategorieProduit() {
+        Long idToRetrieve = 1L;
+        CategorieProduit categorieProduit = new CategorieProduit(1L,"bmw58","voiture",new HashSet<>());
+        when(categorieProduitRepository.findById(idToRetrieve)).thenReturn(Optional.of(categorieProduit));
+        CategorieProduit result = categorieProduitService.retrieveCategorieProduit(idToRetrieve);
+        assertNotNull(result);
+        assertEquals(idToRetrieve, result.getIdCategorieProduit());
+    }
+
+
 
 
 
