@@ -4,7 +4,7 @@ pipeline {
   stages {
     stage('Checkout GIT') {
       steps {
-        git branch: 'GestionFacture',
+        git branch: 'GestionCategorieProduit',
           credentialsId: '37b47f1c-2237-4c2d-93f3-47a063dd3226',
           url :'https://github.com/samarcherni/DevOpsProject.git'
       }
