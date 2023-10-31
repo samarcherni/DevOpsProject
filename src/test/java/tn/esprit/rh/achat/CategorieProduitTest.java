@@ -50,7 +50,7 @@ public class CategorieProduitTest {
 
     @Test
     void testAddCategorieProduit() {
-        CategorieProduit categorieProduit = new CategorieProduit(1L,"se816sd","decoration",new HashSet<>());
+        CategorieProduit categorieProduit = new CategorieProduit(1L,"bmw58","voiture",new HashSet<>());
         when(categorieProduitRepository.save(any(CategorieProduit.class))).thenReturn(categorieProduit);
         CategorieProduit resultat = categorieProduitService.addCategorieProduit(categorieProduit);
         assertNotNull(resultat);
@@ -62,6 +62,15 @@ public class CategorieProduitTest {
         Long idToDelete = 1L;
         categorieProduitService.deleteCategorieProduit(idToDelete);
         Mockito.verify(categorieProduitRepository).deleteById(idToDelete);
+    }
+
+    @Test
+    void testUpdateCategorieProduit() {
+        CategorieProduit categorieProduit = new CategorieProduit(2L,"mac","pc",new HashSet<>());
+        when(categorieProduitRepository.save(any(CategorieProduit.class))).thenReturn(categorieProduit);
+        CategorieProduit result = categorieProduitService.updateCategorieProduit(categorieProduit);
+        assertNotNull(result);
+        assertEquals(categorieProduit, result);
     }
 
 
