@@ -1,0 +1,92 @@
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+import tn.esprit.rh.achat.entities.Operateur;
+import tn.esprit.rh.achat.repositories.OperateurRepository;
+
+@RunWith(MockitoJUnitRunner.class)
+public class OperateurServiceImplTest {
+
+    @InjectMocks
+    private OperateurServiceImpl operateurService;
+
+    @Mock
+    private OperateurRepository operateurRepository;
+
+    // Other dependencies or setup if needed
+
+    @Before
+    public void setUp() {
+        // Initialize any necessary configurations or mock behaviors here
+    }
+
+     @Test
+    public void testAddOperateur() {
+    Operateur newOperateur = new Operateur(1L, "New Operateur");
+
+    Mockito.when(operateurRepository.save(Mockito.any(Operateur.class))).thenReturn(newOperateur);
+
+    Operateur addedOperateur = operateurService.addOperateur(newOperateur);
+
+    // Add assertions to check if the addedOperateur matches the expected behavior
+    // For example:
+    assertEquals(newOperateur, addedOperateur);
+    }
+/*
+    @Test
+    public void testRetrieveAllOperateurs() {
+    List<Operateur> expectedOperateurs = new ArrayList<>();
+    expectedOperateurs.add(new Operateur(1L, "Operateur1"));
+    expectedOperateurs.add(new Operateur(2L, "Operateur2"));
+
+    Mockito.when(operateurRepository.findAll()).thenReturn(expectedOperateurs);
+
+    List<Operateur> result = operateurService.retrieveAllOperateurs();
+
+    // Add assertions to check if the result matches the expected behavior
+    // For example:
+    assertEquals(expectedOperateurs, result);
+    assertEquals(2, result.size());
+}
+
+    @Test
+    public void testRetrieveOperateur() {
+    Long operateurIdToRetrieve = 1L;
+    Operateur expectedOperateur = new Operateur(operateurIdToRetrieve, "Retrieved Operateur");
+
+    Mockito.when(operateurRepository.findById(operateurIdToRetrieve)).thenReturn(Optional.of(expectedOperateur));
+
+    Operateur retrievedOperateur = operateurService.retrieveOperateur(operateurIdToRetrieve);
+
+    // Add assertions to check if the retrievedOperateur matches the expectedOperateur
+    // For example:
+    assertEquals(expectedOperateur, retrievedOperateur);
+    //assertNotNull(result);
+}
+    @Test
+    public void testUpdateOperateur() {
+    Operateur updatedOperateur = new Operateur(1L, "Updated Operateur");
+
+    Mockito.when(operateurRepository.save(Mockito.any(Operateur.class))).thenReturn(updatedOperateur);
+
+    Operateur result = operateurService.updateOperateur(updatedOperateur);
+
+    // Add assertions to check if the result matches the updatedOperateur
+    // For example:
+    assertEquals(updatedOperateur, result);
+    //assertEquals("UpdatedOperateur", result.getName());
+
+}
+    @Test
+    public void testDeleteOperateur() {
+    Long operateurIdToDelete = 1L;
+
+    operateurService.deleteOperateur(operateurIdToDelete);
+
+    Mockito.verify(operateurRepository, Mockito.times(1)).deleteById(operateurIdToDelete);
+}
+*/
+}
