@@ -25,6 +25,20 @@ pipeline {
                 }
             }
         }
+        stage('Test') {
+            steps {
+                sh 'mvn test' 
+            }
+
+         }
+        stage('Static Test with Sonar') {
+            steps {
+                 script {
+                    sh "mvn sonar:balkiss"
+                 }
+            }
+        }
+
          stage('Maven deploy with Nexus') {
             steps {
                 script {
@@ -32,12 +46,6 @@ pipeline {
                 }
             }
         }
-         stage('Test') {
-            steps {
-                sh 'mvn test' 
-            }
-
-         }
 
 
     }
