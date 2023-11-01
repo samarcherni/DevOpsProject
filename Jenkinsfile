@@ -20,24 +20,25 @@ pipeline {
                 sh 'mvn compile'
             }
         }
+    stage('Mockito Tests') {
+     steps {
+      sh 'mvn clean test -Pmockito-tests'
+        }
+        post {
+          always {
+            junit(
+              allowEmptyResults: true,
+              testResults: 'target/surefire-reports/**/*.xml'
+               )
+             }
+            }
+        }
     stage('Quality test SONARQUBE') {
       steps {
         sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=devops'
       }
     }
-    stage('Mockito Tests') {
-                steps {
-                    sh 'mvn clean test -Pmockito-tests'
-                }
-                post {
-                    always {
-                        junit(
-                            allowEmptyResults: true,
-                            testResults: 'target/surefire-reports/**/*.xml'
-                        )
-                    }
-                }
-            }
+
     stage('Deploy artifact with Nexus') {
       steps {
         sh 'mvn deploy -DskipTests'
