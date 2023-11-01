@@ -6,7 +6,6 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import tn.esprit.rh.achat.entities.Operateur;
 import tn.esprit.rh.achat.repositories.OperateurRepository;
-
 @RunWith(MockitoJUnitRunner.class)
 public class OperateurServiceImplTest {
 
