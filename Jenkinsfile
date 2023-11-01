@@ -34,7 +34,7 @@ pipeline {
         stage('Static Test with Sonar') {
             steps {
                  script {
-                    sh "mvn sonar:balkiss"
+                    sh "mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=balkiss"
                  }
             }
         }
