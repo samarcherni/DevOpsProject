@@ -58,6 +58,7 @@ pipeline {
                     echo "Nouvelle version : ${newVersion}"
                 }
             }
+            }
 
         stage ("Deploy") {
             steps {
