@@ -17,17 +17,23 @@ pipeline {
                 sh "mvn compile"
             }
         }
+        stage ("Test"){
+            steps {
+                sh "mvn test"
+            }
+        }
+        stage ("Quality test Sonar") {
+                     steps {
+                         sh "mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=ons"
+                     }
+                 }
         stage ("Deploy") {
             steps {
                 sh "mvn deploy"
             }
         }
 
-        stage ("Quality test Sonar") {
-            steps {
-                sh "mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=ons"
-            }
-        }
+
         
     }
 }
