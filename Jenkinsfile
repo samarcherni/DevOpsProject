@@ -39,14 +39,20 @@ pipeline {
             }
         }
 
-         stage('Maven deploy with Nexus') {
+        stage('Maven deploy with Nexus') {
             steps {
                 script {
                     sh "mvn deploy -DskipTests"
                 }
             }
         }
-
+        stage('Build Docker') {
+            steps {
+                script {
+                    sh " docker build"
+                }
+            }
+        }
 
     }
 }
