@@ -50,7 +50,7 @@ pipeline {
         stage('Build Docker') {
             steps {
                 script {
-                    sh "docker build -t achat:1.0 ."
+                    sh "docker build -t balkiss7/achat:1.0 ."
                 }
             }
         }
