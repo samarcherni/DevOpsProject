@@ -55,11 +55,10 @@ pipeline {
             }
         }
         stage('Docker Login') {
-            steps {
-               withCredentials([usernamePassword(credentialsId: 'dockerhubCred', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
-                echo "$DOCKERHUB_PASSWORD" | docker login -u balkiss7 --password-stdin
-
-                }
+           steps{
+                withCredentials([usernamePassword(credentialsId: 'dockerhubCred', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
+                sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
+             }
             }
         }
     }
