@@ -60,6 +60,14 @@ pipeline {
                 sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
              }
             }
+
         }
+       stage('push Docker') {
+            steps {
+                script {
+                    sh "docker push ${DOCKERHUB_USERNAME}/balkiss7/achat:1.0 "
+                }
+            }
+        } 
     }
 }
