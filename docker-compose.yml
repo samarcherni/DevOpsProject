@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  mydb:
+    image: mysql:latest
+    restart: unless-stopped
+    ports:
+      - "3307:3306"  # Expose container port 3306 to host port 3307
+    volumes:
+      - db:/var/lib/mysql
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"  # This is a valid environment variable name for MySQL
+
+  backend:
+    image: balkiss7/achat:1-0
+    restart: unless-stopped
+    ports:
+      - "8089:8089"  # Expose container port 8089 to host port 8089
+    depends_on:
+      - mydb
+    volumes:
+      - db:/var/lib/mysql  # Mount the 'db' volume into the backend container
+
+volumes:
+  db:  # Define a named volume 'db' for persisting MySQL data
