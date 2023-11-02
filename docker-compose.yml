@@ -11,7 +11,7 @@ services:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"  # This is a valid environment variable name for MySQL
 
   backend:
-    image: balkiss7/achat:1-0
+    image: balkiss7/achat:1.0
     restart: unless-stopped
     ports:
       - "8089:8089"  # Expose container port 8089 to host port 8089
