@@ -65,7 +65,7 @@ pipeline {
        stage('push Docker') {
             steps {
                 script {
-                    sh "docker push ${DOCKERHUB_USERNAME}/balkiss7/achat:1.0 "
+                    sh "docker push ${DOCKERHUB_USERNAME}/achat:1.0 "
                 }
             }
         } 
