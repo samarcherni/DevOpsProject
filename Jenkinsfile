@@ -49,7 +49,7 @@ pipeline {
         stage('Build Docker') {
             steps {
                 script {
-                    sh " docker build"
+                    sh " docker build -t achat:1.0 ."
                 }
             }
         }
