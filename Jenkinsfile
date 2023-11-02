@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        DOCKERHUB_USERNAME = 'balkiss7'
+    }
     stages {
         stage('Checkout Git') {
             steps {
@@ -29,16 +32,14 @@ pipeline {
             steps {
                 sh 'mvn test' 
             }
-
-         }
+        }
         stage('Static Test with Sonar') {
             steps {
-                 script {
+                script {
                     sh "mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=balkiss"
-                 }
+                }
             }
         }
-
         stage('Maven deploy with Nexus') {
             steps {
                 script {
@@ -49,10 +50,16 @@ pipeline {
         stage('Build Docker') {
             steps {
                 script {
-                    sh " docker build -t achat:1.0 ."
+                    sh "docker build -t achat:1.0 ."
                 }
             }
         }
-
+        stage('Docker Login') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'dockerhubCred', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
+                    sh "docker login -u \${DOCKERHUB_USERNAME} -p \${DOCKERHUB_PASSWORD}"
+                }
+            }
+        }
     }
 }
