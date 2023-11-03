@@ -68,13 +68,13 @@ pipeline {
                     sh "docker push ${DOCKERHUB_USERNAME}/reglement:1.0"
                 }
             }
-        } /*
+        } 
          stage('Docker Compose') {
             steps {
                 script {
                     sh "docker compose up -d"
                 }
             }
-        } */
+        } 
     }
 }
