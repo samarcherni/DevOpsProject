@@ -57,6 +57,12 @@ pipeline {
       sh 'docker push samarcherni/achat:1.0'
      }
     }
+
+    stage('Docker compose'){
+     steps{
+      sh 'docker compose up'
+     }
+    }
   
 }
 }
