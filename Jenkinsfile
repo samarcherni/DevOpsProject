@@ -65,14 +65,14 @@ pipeline {
        stage('push Docker') {
             steps {
                 script {
-                    sh "docker push ${DOCKERHUB_USERNAME}/achat:1.0 "
+                    sh "docker push ${DOCKERHUB_USERNAME}/achat:1.0"
                 }
             }
         } 
          stage('Docker Compose') {
             steps {
                 script {
-                    sh "docker compose up "
+                    sh "docker compose up -d"
                 }
             }
         } 
