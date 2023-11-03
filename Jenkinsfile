@@ -46,17 +46,17 @@ pipeline {
                     sh "mvn deploy -DskipTests"
                 }
             }
-        }/*
+        }
         stage('Build Docker') {
             steps {
                 script {
-                    sh "docker build -t balkiss7/achat:1.0 ."
+                    sh "docker build -t saharmili/reglement:1.0 ."
                 }
             }
         }
         stage('Docker Login') {
            steps{
-                withCredentials([usernamePassword(credentialsId: 'operateur', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
+                withCredentials([usernamePassword(credentialsId: 'docker', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
                 sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
              }
             }
@@ -65,10 +65,10 @@ pipeline {
        stage('push Docker') {
             steps {
                 script {
-                    sh "docker push ${DOCKERHUB_USERNAME}/achat:1.0"
+                    sh "docker push ${DOCKERHUB_USERNAME}/reglement:1.0"
                 }
             }
-        } 
+        } /*
          stage('Docker Compose') {
             steps {
                 script {
