@@ -34,8 +34,22 @@ pipeline {
             }
         }
 
-
-        
+        stage ("Build docker image") {
+                    steps {
+                        sh 'docker build -t onsbha/achat:1.2.0 .'
+                    }
+            }
+        stage ("Push docker image") {
+                    steps {
+                        sh 'docker login -u onsbha -p B*z2d6Hgf9wvMW#'
+                        sh 'docker push onsbha/achat:1.2.0'
+                    }
+            }
+        stage ("Docker-Compose") {
+                    steps {
+                        sh 'docker compose up -d'
+                    }
+            }
     }
 }
 

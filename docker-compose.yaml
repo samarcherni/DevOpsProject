@@ -1,0 +1,25 @@
+version: "3.8"
+services:
+  mysqldb:
+    image: mysql:5.7.8
+    restart: unless-stopped
+    ports:
+      - 3306:3306
+    volumes:
+      - db:/var/lib/mysql
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: mysqldb
+  backend:
+    image: onsbha/achat:1.2.0
+    restart: unless-stopped
+    ports:
+      - 8089:8089
+    depends_on:
+      - mysqldb
+#  front:
+#    image: onsbahri
+#    restart: unless-stopped
+#    ports:
+#      - 80:80
+
