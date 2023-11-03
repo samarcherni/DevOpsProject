@@ -39,14 +39,14 @@ pipeline {
                     sh "mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=devops"
                 }
             }
-        }/* 
+        } 
         stage('Maven deploy with Nexus') {
             steps {
                 script {
                     sh "mvn deploy -DskipTests"
                 }
             }
-        }
+        }/*
         stage('Build Docker') {
             steps {
                 script {
