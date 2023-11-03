@@ -44,6 +44,19 @@ pipeline {
         sh 'mvn deploy -DskipTests'
       }
     }
+
+    stage('Docker build'){
+     steps{
+      sh 'docker build -t samarcherni/achat:1.0 .'
+     }
+    }
+
+    stage('Docker push image'){
+     steps{
+      sh 'docker login -u samarcherni -p Handsoff2021'
+      sh 'docker push samarcherni/achat:1.0'
+     }
+    }
   
 }
 }
