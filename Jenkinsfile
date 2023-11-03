@@ -32,14 +32,14 @@ pipeline {
             steps {
                 sh 'mvn test' 
             }
-        }
+        }*/
         stage('Static Test with Sonar') {
             steps {
                 script {
-                    sh "mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=balkiss"
+                    sh "mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=devops"
                 }
             }
-        } 
+        }/* 
         stage('Maven deploy with Nexus') {
             steps {
                 script {
