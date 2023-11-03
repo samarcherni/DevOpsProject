@@ -50,7 +50,7 @@ pipeline {
         stage('Build Docker') {
             steps {
                 script {
-                    sh "docker build -t saharmili/reglement:3.0 ."
+                    sh "docker build -t saharmili/reglement:4.0 ."
                 }
             }
         }
@@ -65,7 +65,7 @@ pipeline {
        stage('push Docker') {
             steps {
                 script {
-                    sh "docker push ${DOCKERHUB_USERNAME}/reglement:3.0"
+                    sh "docker push ${DOCKERHUB_USERNAME}/reglement:4.0"
                 }
             }
         } 
