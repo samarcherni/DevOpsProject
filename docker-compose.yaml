@@ -4,12 +4,11 @@ services:
     image: mysql:5.7.8
     restart: unless-stopped
     ports:
-      - 3306:3306
+      - 3307:3306
     volumes:
-      - db:/var/lib/mysql
+      - dbVolume:/var/lib/mysql
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-      MYSQL_DATABASE: mysqldb
   backend:
     image: onsbha/achat:1.2.0
     restart: unless-stopped
@@ -22,4 +21,6 @@ services:
 #    restart: unless-stopped
 #    ports:
 #      - 80:80
+volumes:
+  dbVolume:
 
