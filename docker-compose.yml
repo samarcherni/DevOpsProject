@@ -1,21 +1,31 @@
 version: '3.8'
 services:
   mydb:
+    container_name: mydb
     image: mysql:5.7.8
     restart: unless-stopped
     ports:
-      - "3308:3306"  # Expose container port 3306 to host port 3307
+      - "3308:3306"  # Expose container port 3306 to host port 3308
     volumes:
       - db:/var/lib/mysql
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"  # This is a valid environment variable name for MySQL
 
   backend:
+    container_name: backend
     image: balkiss7/achat:1.0
     restart: unless-stopped
     ports:
       - "8089:8089"  # Expose container port 8089 to host port 8089
     depends_on:
       - mydb
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mydb:3306/achatdb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD:
+      SPRING_JPA_SHOW_SQL: "true"
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.MySQL5InnoDBDialect
+
 volumes:
   db:  # Define a named volume 'db' for persisting MySQL data
