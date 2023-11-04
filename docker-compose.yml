@@ -1,22 +1,35 @@
-version: '3.8'
+version: "3.8"
 services:
-  mydb:
-    image: mysql:5.7.8
+  mysqldb:
+    image: mysql:5.7
     restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ""
+      MYSQL_DATABASE: achatdb  # Corrected the environment variable format
     ports:
-      - 3306:3306  # Corrected the port mapping to "host_port:container_port"
+      - 3307:3306
     volumes:
       - db:/var/lib/mysql
-    environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes" # This is a valid environment variable name for MySQL
-      MYSQL_DATABASE: achatdb  # Corrected the environment variable assignment
 
-  backend:
-    image: balkiss7/achat:1.0
-    restart: unless-stopped
-    ports:
-      - "8089:8089"  # Expose container port 8089 to host port 8089
+  achatBack:
     depends_on:
-      - mydb
+      - mysqldb
+    image: balkiss7/achat:1.0
+    restart: on-failure
+    ports:
+      - "8089:8089"  # Corrected the port mapping format
+    environment:
+      SPRING_APPLICATION_JSON: '{
+        "spring.datasource.url": "jdbc:mysql://mysqldb:3306/achatdb?useSSL=false",
+        "spring.datasource.username": "root",
+        "spring.datasource.password": "",  # Added an empty password
+        "spring.jpa.show-sql": "true",
+        "spring.jpa.properties.hibernate.dialect": "org.hibernate.dialect.MySQL5InnoDBDialect",
+        "spring.jpa.hibernate.ddl-auto": "update"
+      }'
+    volumes:
+      - .m2:/root/.m2
+    stdin_open: true
+    tty: true
 volumes:
-  db:  # Define a named volume 'db' for persisting MySQL data
+  db:
