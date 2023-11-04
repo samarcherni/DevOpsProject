@@ -1,15 +1,29 @@
 version: '3.8'
 
+networks:
+  my_network:   # Define a custom network
+    driver: bridge
+
+  backendNetwork:  # Define another custom network
+    driver: bridge
+
+  frontendNetwork:  # Define yet another custom network
+    driver: bridge
+
 services:
   mysqldb:
     image: mysql:5.7
     restart: unless-stopped
     ports:
-      - 3307:3306
-    volumes:
-      - db:/var/lib/msql
+      - 3306:3306
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: achatdb
+    volumes:
+      - db:/var/lib/msql
+    networks:
+      - backendNetwork
+
   achat-backend:
     image: samarcherni/achat:1.0
     restart: unless-stopped
@@ -17,5 +31,19 @@ services:
       - 8089:8089
     depends_on:
       - mysqldb
+    networks:
+      - backendNetwork
+      - frontendNetwork
+  achat-frontend:
+    image: samarcherni/front:1.0
+    restart: unless-stopped
+    ports:
+      - 4200:80
+    volumes:
+      - frontend-data:/usr/share/nginx/html
+    networks:
+      - frontendNetwork
+
 volumes:
   db:
+  frontend-data:
