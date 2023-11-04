@@ -9,7 +9,7 @@ services:
       - db:/var/lib/mysql
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes" # This is a valid environment variable name for MySQL
-      MYSQL_DATABASE: mydb  # Corrected the environment variable assignment
+      MYSQL_DATABASE: achatdb  # Corrected the environment variable assignment
 
   backend:
     image: balkiss7/achat:1.0
