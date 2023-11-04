@@ -4,11 +4,12 @@ services:
     image: mysql:5.7.8
     restart: unless-stopped
     ports:
-      - 3307:3306
+      - 3306:3306  # Corrected the port mapping to "host_port:container_port"
     volumes:
       - db:/var/lib/mysql
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes" # This is a valid environment variable name for MySQL
+      MYSQL_DATABASE: mydb  # Corrected the environment variable assignment
 
   backend:
     image: balkiss7/achat:1.0
