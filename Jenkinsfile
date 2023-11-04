@@ -9,7 +9,7 @@ pipeline {
                 script {
                     git branch: 'GestionOperateur',
                         url: 'https://github.com/samarcherni/DevOpsProject.git',
-                        credentialsId: 'devops-classe-git'
+                        credentialsId: 'devops-classe-git' 
                     echo 'Git done'
                 }
             }
