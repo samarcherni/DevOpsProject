@@ -15,10 +15,5 @@ services:
     restart: unless-stopped
     ports:
       - 8089:8089
-  front:
-    image: ahmedazizdridi/front:20  # Replace with the actual image for your front-end
-    restart: unless-stopped
-    ports:
-      - 80:80
 volumes:
   db:
