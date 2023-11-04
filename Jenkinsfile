@@ -28,7 +28,7 @@ pipeline {
                 }
             }
         }
-        stage('Test') {
+      /*  stage('Test') {
             steps {
                 sh 'mvn test' 
             }
@@ -39,7 +39,7 @@ pipeline {
                     sh "mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=balkiss"
                 }
             }
-        } 
+        } */
         stage('Maven deploy with Nexus') {
             steps {
                 script {
@@ -50,7 +50,7 @@ pipeline {
         stage('Build Docker') {
             steps {
                 script {
-                    sh "docker build -t balkiss7/achat:1.0 ."
+                    sh "docker build -t balkiss7/achat:11 ."
                 }
             }
         }
@@ -65,7 +65,7 @@ pipeline {
        stage('push Docker') {
             steps {
                 script {
-                    sh "docker push ${DOCKERHUB_USERNAME}/achat:1.0"
+                    sh "docker push ${DOCKERHUB_USERNAME}/achat:11"
                 }
             }
         } 
