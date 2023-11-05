@@ -1,19 +1,32 @@
 version: '3.8'
-
+networks:
+  network:
+    driver: bridge
+  backendNetwork:
+    driver: bridge
 services:
   mysqldb:
-    image: mysql:5.7.8
+    image: mysql:5.7
     restart: unless-stopped
     ports:
-      - 3307:3306
-    volumes:
-      - db:/var/lib/mysql
+      - "3306:3306"  # Port mapping should be in double quotes
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: achatdb
+    volumes:
+      - db:/var/lib/mysql  # Typo: "msql" should be "mysql"
+    networks:
+      - backendNetwork
+
   backend:
     image: balkiss7/achat:11
     restart: unless-stopped
     ports:
-      - 8089:8089
+      - "8089:8089"  # Port mapping should be in double quotes
+    depends_on:
+      - mysqldb
+    networks:
+      - backendNetwork
+
 volumes:
   db:
