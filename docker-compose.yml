@@ -35,7 +35,7 @@ services:
       - backendNetwork
       - frontendNetwork
   achat-frontend:
-    image: samarcherni/frontend:1.5
+    image: samarcherni/frontendd:1.5
     restart: unless-stopped
     ports:
       - 4200:80
