@@ -47,14 +47,14 @@ pipeline {
     
     stage('Docker build'){
      steps{
-      sh 'docker build -t samarcherni/achat:1.5 .'
+      sh 'docker build -t samarcherni/backachat:1.11 .'
      }
     }
 
     stage('Docker push image'){
      steps{
       sh 'docker login -u samarcherni -p Handsoff2021'
-      sh 'docker push samarcherni/achat:1.5'
+      sh 'docker push samarcherni/backachat:1.11'
      }
     }
 
