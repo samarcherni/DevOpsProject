@@ -1,50 +1,43 @@
-version: '3.8'
-
-networks:
-  my_network:   # Define a custom network
-    driver: bridge
-
-  backendNetwork:  # Define another custom network
-    driver: bridge
-
-  frontendNetwork:  # Define yet another custom network
-    driver: bridge
+version: "3"
 
 services:
-  mysqldb:
-    image: mysql:5.7
-    container_name: mysqldb
-    restart: unless-stopped
+  mysql-db:
+    image: mysql:latest
+    container_name: devops-db
     ports:
-      - 3306:3306
+      - "3306:3306"
     environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-      MYSQL_DATABASE: achatdb
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=mydatabase
     volumes:
-      - db:/var/lib/msql
+      - ./data.sql:/docker-entrypoint-initdb.d/data.sql
     networks:
-      - backendNetwork
+      - my-network
+    restart: on-failure
 
-  achat-backend:
-    image: samarcherni/backachat:1.11
-    restart: unless-stopped
+  spring-boot-app:
+    image: samarcherni/devops_project:spring
+    container_name: devops_project_spring
+
     ports:
-      - 8089:8089
+      - "8088:8082"
     depends_on:
-      - mysqldb
+      - mysql-db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/mydatabase?createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=
     networks:
-      - backendNetwork
-      - frontendNetwork
-  achat-frontend:
-    image: samarcherni/bekindfront:angular
-    restart: unless-stopped
-    ports:
-      - 4200:80
-    volumes:
-      - frontend-data:/usr/share/nginx/html
-    networks:
-      - frontendNetwork
+      - my-network
+    restart: on-failure
 
-volumes:
-  db:
-  frontend-data:
+  angular-app:
+    image: samarcherni/devops_project:angular
+    container_name: devops_project_angular
+
+    ports:
+      - "4208:80"
+    depends_on:
+      - spring-boot-app
+    networks:
+      - my-network
