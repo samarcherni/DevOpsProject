@@ -44,7 +44,7 @@ pipeline {
         sh 'mvn deploy -DskipTests'
       }
     }
-/*
+    
     stage('Docker build'){
      steps{
       sh 'docker build -t samarcherni/achat:1.4 .'
@@ -63,6 +63,5 @@ pipeline {
       sh 'docker compose up -d'
      }
     }
-  */
 }
 }
