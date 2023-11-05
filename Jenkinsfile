@@ -38,13 +38,13 @@ pipeline {
         sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=devops'
       }
     }
-   /*
+   
     stage('Deploy artifact with Nexus') {
       steps {
         sh 'mvn deploy -DskipTests'
       }
     }
-
+/*
     stage('Docker build'){
      steps{
       sh 'docker build -t samarcherni/achat:1.4 .'
