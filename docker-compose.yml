@@ -1,32 +1,21 @@
 version: '3.8'
-networks:
-  network:
-    driver: bridge
-  backendNetwork:
-    driver: bridge
 services:
-  mysqldb:
-    image: mysql:5.7
+  mydb:
+    image: mysql:latest
     restart: unless-stopped
     ports:
-      - "3306:3306"  # Port mapping should be in double quotes
-    environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-      MYSQL_DATABASE: achatdb
+      - "3307:3306"  # Expose container port 3306 to host port 3307
     volumes:
-      - db:/var/lib/mysql  # Typo: "msql" should be "mysql"
-    networks:
-      - backendNetwork
+      - db:/var/lib/mysql
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"  # This is a valid environment variable name for MySQL
 
   backend:
     image: balkiss7/achat:11
     restart: unless-stopped
     ports:
-      - "8089:8089"  # Port mapping should be in double quotes
+      - "8089:8089"  # Expose container port 8089 to host port 8089
     depends_on:
-      - mysqldb
-    networks:
-      - backendNetwork
-
+      - mydb
 volumes:
-  db:
+  db:  # Define a named volume 'db' for persisting MySQL data
