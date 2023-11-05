@@ -38,7 +38,7 @@ pipeline {
         sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=devops'
       }
     }
-
+   /*
     stage('Deploy artifact with Nexus') {
       steps {
         sh 'mvn deploy -DskipTests'
@@ -63,6 +63,6 @@ pipeline {
       sh 'docker compose up -d'
      }
     }
-  
+  */
 }
 }
