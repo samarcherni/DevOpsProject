@@ -2,7 +2,7 @@ version: '3.8'
 services:
   saharDB:
     restart: unless-stopped
-    image: mysql:latest
+    image: mysql:5.7.8
     ports:
       - "3307:3306"
     volumes:
