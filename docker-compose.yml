@@ -1,24 +1,20 @@
-version: '3.8'
+version: "3.8"
 services:
-  saharDB:
+  mysqldb:
     image: mysql:5.7.8
+    restart: unless-stopped
     ports:
-      - "3306:3306"
+      - 3307:3306
     volumes:
-      - mysql-data:/var/lib/mysql
+      - dbVolume:/var/lib/mysql
     environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"  # This is a valid environment variable name for MySQL
-
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
   backend:
     image: saharmili/reglement:1.0
     restart: unless-stopped
     ports:
-      - "8086:8086"  # Expose container port 8089 to host port 8089
+      - 8086:8086
     depends_on:
-      - saharDB
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://saharDB:3306/devops?createDatabaseIfNotExist=true
-      SPRING_DATASOURCE_USERNAME: root
-      MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: '*'
+      - mysqldb
 volumes:
-  mysql-data:  # Define a named volume 'db' for persisting MySQL data
+  dbVolume:
