@@ -47,16 +47,22 @@ pipeline {
     
     stage('Docker build'){
      steps{
-      sh 'docker build -t samarcherni/devops_project:spring .'
+      sh 'docker build -t samarcherni/samardevopsb:spring --network host .'
      }
     }
 
     stage('Docker push image'){
      steps{
       sh 'docker login -u samarcherni -p Handsoff2021'
-      sh 'docker push samarcherni/devops_project:spring'
+      sh 'docker push samarcherni/samardevopsb:spring'
      }
     }
+    stage('Docker-Compose Deploying'){
+      steps{
 
+        sh 'docker compose up -d --remove-orphans'
+      }
+    }
+      
 }
 }
