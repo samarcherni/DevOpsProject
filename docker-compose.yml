@@ -16,5 +16,9 @@ services:
       - 8086:8086
     depends_on:
       - mysqldb
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://saharDB:3306/devops?createDatabaseIfNotExist=true
+      #SPRING_DATASOURCE_USERNAME: root
+      #MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: '*'
 volumes:
   dbVolume:
