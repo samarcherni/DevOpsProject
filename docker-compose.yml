@@ -10,7 +10,7 @@ services:
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
   backend:
-    image: balkiss07/achat:11
+    image: balkiss7/achat:11
     restart: unless-stopped
     ports:
       - 8089:8089
