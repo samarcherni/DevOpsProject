@@ -78,7 +78,7 @@ pipeline {
             }
         }
 
-     /*   stage('Checkout Frontend Git') {
+       stage('Checkout Frontend Git') {
             steps {
                 script {
                     git branch: 'main',
@@ -120,7 +120,7 @@ pipeline {
                         credentialsId: 'git'
                 }
             }
-        }*/
+        }
 
         stage('Docker Compose Up') {
             steps {
