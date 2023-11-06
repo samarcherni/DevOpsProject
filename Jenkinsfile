@@ -28,7 +28,7 @@ pipeline {
                 }
             }
         }
-      /*  stage('Test') {
+       stage('Test') {
             steps {
                 sh 'mvn test' 
             }
@@ -39,7 +39,7 @@ pipeline {
                     sh "mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=balkiss"
                 }
             }
-        } */
+        } 
         stage('Maven deploy with Nexus') {
             steps {
                 script {
