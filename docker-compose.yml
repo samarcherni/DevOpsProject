@@ -15,8 +15,8 @@ services:
     restart: unless-stopped
     ports:
       - "8086:8086"  # Expose container port 8089 to host port 8089
-    depends_on:
-      - saharDB
+    #depends_on:
+     # - saharDB
     #environment:
      # SPRING_DATASOURCE_URL: jdbc:mysql://saharDB:3306/achatdb?createDatabaseIfNotExist=true
       #SPRING_DATASOURCE_USERNAME: root
