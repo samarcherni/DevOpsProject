@@ -4,7 +4,7 @@ services:
     image: mysql:5.7.8
     restart: unless-stopped
     ports:
-      - 3307:3306
+      - 3306:3306
     volumes:
       - dbVolume:/var/lib/mysql
     environment:
@@ -18,7 +18,8 @@ services:
       - mysqldb
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://saharDB:3306/achatdb?createDatabaseIfNotExist=true
-      #SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD:
       #MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: '*'
 volumes:
   dbVolume:
