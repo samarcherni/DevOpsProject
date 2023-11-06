@@ -69,6 +69,38 @@ pipeline {
                 }
             }
         } 
+        stage('Checkout Git') {
+            steps {
+                script {
+                    git branch: 'main',
+                        url: 'https://github.com/milisahar/frontend-devops-project.git',
+                        credentialsId: 'git'
+                    
+                }
+            }
+        }
+        stage('Build Docker') {
+            steps {
+                script {
+                    sh "docker build -t saharmili/reglement-front:1.0 ."
+                }
+            }
+        }
+        stage('Docker Login') {
+           steps{
+                withCredentials([usernamePassword(credentialsId: 'docker', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
+                sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
+             }
+            }
+
+        }
+       stage('push Docker') {
+            steps {
+                script {
+                    sh "docker push ${DOCKERHUB_USERNAME}/reglement-front:1.0"
+                }
+            }
+        } 
          stage('Docker Compose') {
             steps {
                 script {
