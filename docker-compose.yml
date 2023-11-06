@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   saharDB:
-    image: mysql:latest
+    image: mysql
     restart: unless-stopped
     ports:
       - 3307:3306
