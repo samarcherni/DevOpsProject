@@ -69,6 +69,49 @@ pipeline {
                 }
             }
         } 
+        stage('Checkout Frontend Git') {
+            steps {
+                script {
+                    git branch: 'GestionOperateur',
+                        url: 'https://github.com/samarcherni/DevOpsProject-Front.git',
+                        credentialsId: 'devops-classe-git'
+                }
+            }
+        }
+
+        stage('Build Frontend Docker') {
+            steps {
+                script {
+                    sh "docker build -t ${DOCKERHUB_USERNAME}/operateur-front:1.0 ."
+                }
+            }
+        }
+
+        stage('Docker Login Frontend') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'docker', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
+                    sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
+                }
+            }
+        }
+
+        stage('Push Docker Frontend') {
+            steps {
+                script {
+                    sh "docker push ${DOCKERHUB_USERNAME}/operateur-front:1.0"
+                }
+            }
+        }
+
+        stage('Checkout Git for Docker Compose') {
+            steps {
+                script {
+                    git branch: 'GestionOperateur',
+                        url: 'https://github.com/samarcherni/DevOpsProject.git',
+                        credentialsId: 'devops-classe-git'
+                }
+            }
+        }
          stage('Docker Compose') {
             steps {
                 script {
