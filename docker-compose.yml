@@ -1,0 +1,44 @@
+version: "3.8"
+services:
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: achatdb
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - network1
+  spring:
+    image: samarcherni/samardevopsb:spring
+    restart: on-failure
+    ports:
+      - "8089:8089"
+    environment:
+      SPRING_APPLICATION_JSON: '{
+              "spring.datasource.url"  : "jdbc:mysql://db:3306/achatdb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
+              "spring.datasource.username" : "root",
+              "spring.datasource.password" : ,
+              "spring.jpa.hibernate.ddl-auto" : "update"
+            }'
+    depends_on:
+      - db
+    stdin_open: true
+    tty: true
+    networks:
+      - network1
+  angular:
+    image: samarcherni/angularops:v2
+    restart: always
+    ports:
+      - "80:80"
+    networks:
+      - network1
+volumes:
+  db_data: {}
+networks:
+  network1:
+    driver: bridge
