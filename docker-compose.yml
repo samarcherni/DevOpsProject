@@ -1,9 +1,10 @@
 version: '3.8'
 services:
   saharDB:
+    restart: unless-stopped
     image: mysql:latest
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - mysql-data:/var/lib/mysql
     environment:
@@ -16,9 +17,9 @@ services:
       - "8086:8086"  # Expose container port 8089 to host port 8089
     depends_on:
       - saharDB
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://saharDB:3306/achatdb?createDatabaseIfNotExist=true
-      SPRING_DATASOURCE_USERNAME: root
-      MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: '*'
+    #environment:
+     # SPRING_DATASOURCE_URL: jdbc:mysql://saharDB:3306/achatdb?createDatabaseIfNotExist=true
+      #SPRING_DATASOURCE_USERNAME: root
+      #MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: '*'
 volumes:
   mysql-data:  # Define a named volume 'db' for persisting MySQL data
