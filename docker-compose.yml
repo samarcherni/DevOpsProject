@@ -1,10 +1,9 @@
 version: '3.8'
 services:
   saharDB:
-    image: mysql:5.7.8
-    restart: unless-stopped
+    image: mysql:latest
     ports:
-      - "3307:3306"
+      - "3306:3306"
     volumes:
       - mysql-data:/var/lib/mysql
     environment:
@@ -18,9 +17,8 @@ services:
     depends_on:
       - saharDB
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://saharDB:3306/achatdb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_URL: jdbc:mysql://saharDB:3306/devops?createDatabaseIfNotExist=true
       SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: 
-      #MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: '*'
+      MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: '*'
 volumes:
   mysql-data:  # Define a named volume 'db' for persisting MySQL data
