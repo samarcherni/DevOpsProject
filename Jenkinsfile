@@ -32,5 +32,23 @@ pipeline {
                 sh 'mvn deploy'
             }
         }
+         stage('Docker-build') {
+            steps {
+                sh 'docker build -t SafwenKh/achat:1.0 .'
+            }
+        }
+    
+    stage('Docker push') {
+            steps {
+                sh 'docker login -u SafwenKh -p Docker42426'
+                sh 'docker push SafwenKh/achat:1.0'
+            }
+        }
+    stage('Docker compose') {
+            steps {
+                sh 'docker compose up -d'
+                
+            }
+        }
     }
 }

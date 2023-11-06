@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  dbsaf:
+    image: mysql:5.7.8
+    restart: unless-stopped
+    ports:
+      - 3307:3306
+    volumes:
+      - db:/var/lib/mysql
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+  backend:
+    image: SafwenKH/achat:1.0
+    restart: unless-stopped
+    ports:
+      - 8087:8087
+volumes:
+  db:
