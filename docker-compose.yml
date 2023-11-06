@@ -16,6 +16,10 @@ services:
       - 8089:8089
     depends_on:
       - mydb
-  
+  frontend:
+    image: balkiss7/operateur-front:1.0
+    restart: unless-stopped
+    ports:
+      - 80:80
 volumes:
   dbVolume:
