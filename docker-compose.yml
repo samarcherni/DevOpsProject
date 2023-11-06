@@ -1,21 +1,34 @@
 version: '3.8'
 services:
   mydb:
-    image: mysql:5.7.8
-    restart: unless-stopped
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: achatdb
     ports:
       - "3307:3306"  # Expose container port 3306 to host port 3307
     volumes:
       - db:/var/lib/mysql
-    environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"  # This is a valid environment variable name for MySQL
+    networks:
+      - mynetwork
 
   backend:
-    image: balkiss7/achat:11
-    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "8089:8089"  # Expose container port 8089 to host port 8089
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mydb:3306/achatdb?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    networks:
+      - mynetwork
     depends_on:
       - mydb
+
 volumes:
   db:  # Define a named volume 'db' for persisting MySQL data
+
+networks:
+  mynetwork:
