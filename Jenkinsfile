@@ -34,14 +34,14 @@ pipeline {
         }
          stage('Docker-build') {
             steps {
-                sh 'docker build -t SafwenKh/achat:1.0 .'
+                sh 'docker build -t SafwenKH/achat:1.0 .'
             }
         }
     
     stage('Docker push') {
             steps {
-                sh 'docker login -u SafwenKh -p Docker42426'
-                sh 'docker push SafwenKh/achat:1.0'
+                sh 'docker login -u SafwenKH -p Docker42426'
+                sh 'docker push SafwenKH/achat:1.0'
             }
         }
     stage('Docker compose') {
