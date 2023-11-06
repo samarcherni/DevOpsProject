@@ -2,7 +2,6 @@ pipeline {
     agent any
     environment {
         DOCKERHUB_USERNAME = 'balkiss7'
-        COMPOSE_HTTP_TIMEOUT = '120'
     }
     stages {
         stage('Checkout Git') {
