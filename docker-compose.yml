@@ -4,7 +4,7 @@ services:
     image: mysql:5.7.8
     restart: unless-stopped
     ports:
-      - "3307:3306"
+      - 3307:3306
     volumes:
       - mysql-data:/var/lib/mysql
     environment:
@@ -14,7 +14,7 @@ services:
     image: saharmili/reglement:1.0
     restart: unless-stopped
     ports:
-      - "8086:8086"  # Expose container port 8089 to host port 8089
+      - 8086:8086  # Expose container port 8089 to host port 8089
     #depends_on:
      # - saharDB
     #environment:
