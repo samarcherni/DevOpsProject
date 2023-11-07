@@ -21,6 +21,14 @@ pipeline {
                 sh 'mvn compile'
             }
         }
+              stage('Tests') {
+            steps {
+                // Étape pour exécuter les tests JUnit
+                sh 'mvn test'
+                // Étape pour exécuter les tests Mockito
+                sh 'mvn test -Dtest=SecteurActiviteServiceMockitoTest'
+            }
+        }
 
         stage('Quality test SONARQUBE') {
             steps {
