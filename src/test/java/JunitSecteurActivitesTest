@@ -1,28 +1,37 @@
-import org.junit.Before;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 import tn.esprit.rh.achat.entities.SecteurActivite;
 import tn.esprit.rh.achat.repositories.SecteurActiviteRepository;
-import tn.esprit.rh.achat.services.ISecteurActiviteService;
 import tn.esprit.rh.achat.services.SecteurActiviteServiceImpl;
 
-import java.util.ArrayList;
-import java.util.List;
+public class JunitSecteurActivitesTest {
 
-public class SecteurActiviteServiceUnitTest {
+    private SecteurActiviteServiceImpl secteurActiviteService;
 
-    private ISecteurActiviteService secteurActiviteService;
+    @Mock
+    private SecteurActiviteRepository secteurActiviteRepository;
 
-    @Before
+    @BeforeEach
     public void setUp() {
-        // Vous pouvez initialiser votre service ici, par exemple :
-        SecteurActiviteRepository mockRepository = new MockSecteurActiviteRepository();
-        secteurActiviteService = new SecteurActiviteServiceImpl(mockRepository);
+        MockitoAnnotations.initMocks(this);
+        secteurActiviteService = new SecteurActiviteServiceImpl(secteurActiviteRepository);
     }
 
     @Test
-    public void testRetrieveAllSecteurActivite() {
-        List<SecteurActivite> secteurActivites = secteurActiviteService.retrieveAllSecteurActivite();
-        assertEquals(2, secteurActivites.size());
+    public void testRetrieveSecteurActivite() {
+        Long id = 1L;
+        SecteurActivite expectedSecteurActivite = new SecteurActivite();
+        expectedSecteurActivite.setId(id);
+        
+        when(secteurActiviteRepository.findById(id)).thenReturn(java.util.Optional.of(expectedSecteurActivite));
+
+        SecteurActivite result = secteurActiviteService.retrieveSecteurActivite(id);
+
+        assertEquals(expectedSecteurActivite, result);
     }
+
 }

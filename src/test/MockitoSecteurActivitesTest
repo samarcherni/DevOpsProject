@@ -1,42 +1,41 @@
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import tn.esprit.rh.achat.entities.SecteurActivite;
 import tn.esprit.rh.achat.repositories.SecteurActiviteRepository;
-import tn.esprit.rh.achat.services.ISecteurActiviteService;
 import tn.esprit.rh.achat.services.SecteurActiviteServiceImpl;
 
-import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.*;
 
-public class SecteurActiviteServiceMockitoTest {
+public class MockitoSecteurActivitesTest {
 
     @InjectMocks
-    private ISecteurActiviteService secteurActiviteService = new SecteurActiviteServiceImpl();
+    private SecteurActiviteServiceImpl secteurActiviteService;
 
     @Mock
     private SecteurActiviteRepository secteurActiviteRepository;
 
-    @Before
-    public void init() {
+    @BeforeEach
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
     }
 
     @Test
-    public void testRetrieveAllSecteurActivite() {
-        // Given
-        List<SecteurActivite> secteurActivites = new ArrayList<>();
-        secteurActivites.add(new SecteurActivite(1L, "Secteur 1"));
-        secteurActivites.add(new SecteurActivite(2L, "Secteur 2"));
+    public void testAddSecteurActivite() {
+        SecteurActivite secteurActivite = new SecteurActivite();
+        secteurActiviteService.addSecteurActivite(secteurActivite);
 
-        Mockito.when(secteurActiviteRepository.findAll()).thenReturn(secteurActivites);
-
-        // When
-        List<SecteurActivite> result = secteurActiviteService.retrieveAllSecteurActivite();
-
-        // Then
-        assertEquals(2, result.size());
+        verify(secteurActiviteRepository, times(1)).save(secteurActivite);
     }
+
+    @Test
+    public void testDeleteSecteurActivite() {
+        Long id = 1L;
+        secteurActiviteService.deleteSecteurActivite(id);
+
+        verify(secteurActiviteRepository, times(1)).deleteById(id);
+    }
+
 }
