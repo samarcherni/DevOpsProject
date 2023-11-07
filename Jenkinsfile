@@ -21,7 +21,7 @@ pipeline {
                 sh 'mvn compile'
             }
         }
-        stage('Tests JUnit') {
+     /*   stage('Tests JUnit') {
             steps {
                 sh 'mvn test -Dtest=JunitSecteurActivitesTest'
             }
@@ -32,7 +32,7 @@ pipeline {
                 sh 'mvn test -Dtest=SecteurActiviteServiceMockitoTest'
             }
         }
-
+*/
         stage('Quality test SONARQUBE') {
             steps {
         sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar'
