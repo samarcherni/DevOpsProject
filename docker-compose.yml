@@ -20,6 +20,6 @@ services:
     image: balkiss7/operateur-front:1.0
     restart: unless-stopped
     ports:
-      - 8082:8082
+      - 80:80
 volumes:
   dbVolume:
