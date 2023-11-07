@@ -1,0 +1,28 @@
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.*;
+import tn.esprit.rh.achat.entities.SecteurActivite;
+import tn.esprit.rh.achat.repositories.SecteurActiviteRepository;
+import tn.esprit.rh.achat.services.ISecteurActiviteService;
+import tn.esprit.rh.achat.services.SecteurActiviteServiceImpl;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class SecteurActiviteServiceUnitTest {
+
+    private ISecteurActiviteService secteurActiviteService;
+
+    @Before
+    public void setUp() {
+        // Vous pouvez initialiser votre service ici, par exemple :
+        SecteurActiviteRepository mockRepository = new MockSecteurActiviteRepository();
+        secteurActiviteService = new SecteurActiviteServiceImpl(mockRepository);
+    }
+
+    @Test
+    public void testRetrieveAllSecteurActivite() {
+        List<SecteurActivite> secteurActivites = secteurActiviteService.retrieveAllSecteurActivite();
+        assertEquals(2, secteurActivites.size());
+    }
+}

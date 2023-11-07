@@ -1,0 +1,42 @@
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import tn.esprit.rh.achat.entities.SecteurActivite;
+import tn.esprit.rh.achat.repositories.SecteurActiviteRepository;
+import tn.esprit.rh.achat.services.ISecteurActiviteService;
+import tn.esprit.rh.achat.services.SecteurActiviteServiceImpl;
+
+import static org.junit.Assert.assertEquals;
+
+public class SecteurActiviteServiceMockitoTest {
+
+    @InjectMocks
+    private ISecteurActiviteService secteurActiviteService = new SecteurActiviteServiceImpl();
+
+    @Mock
+    private SecteurActiviteRepository secteurActiviteRepository;
+
+    @Before
+    public void init() {
+        MockitoAnnotations.initMocks(this);
+    }
+
+    @Test
+    public void testRetrieveAllSecteurActivite() {
+        // Given
+        List<SecteurActivite> secteurActivites = new ArrayList<>();
+        secteurActivites.add(new SecteurActivite(1L, "Secteur 1"));
+        secteurActivites.add(new SecteurActivite(2L, "Secteur 2"));
+
+        Mockito.when(secteurActiviteRepository.findAll()).thenReturn(secteurActivites);
+
+        // When
+        List<SecteurActivite> result = secteurActiviteService.retrieveAllSecteurActivite();
+
+        // Then
+        assertEquals(2, result.size());
+    }
+}
