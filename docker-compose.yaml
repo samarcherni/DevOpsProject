@@ -20,7 +20,7 @@ services:
     image: onsbha/achat.front:1.2.0
     restart: unless-stopped
     ports:
-      - 80:80
+      - 8087:4200
 volumes:
   dbVolume:
 
