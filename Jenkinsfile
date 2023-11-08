@@ -70,7 +70,7 @@ pipeline {
             steps {
                 script {
                     sh 'docker login -u safwenkh -p Docker42426'
-                    sh "docker push safwenkh/reglement-front:1.0"
+                    sh "docker push safwenkh/front:1.0"
                 }
             }
         }
