@@ -15,5 +15,10 @@ services:
     restart: unless-stopped
     ports:
       - 8087:8087
+  front:
+    image: safwenkh/front:1.0 
+    restart: unless-stopped
+    ports:
+      - 80:80
 volumes:
   db:
