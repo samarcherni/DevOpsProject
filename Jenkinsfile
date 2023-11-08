@@ -48,6 +48,42 @@ pipeline {
                 sh 'docker push safwenkh/achat:1.0'
             }
         }
+        stage('Checkout Frontend Git') {
+            steps {
+                script {
+                    git branch: 'main',
+                        url: 'https://github.com/Safweno/FrontDevops.git',
+                        credentialsId: 'Git'
+                }
+            }
+        }
+
+        stage('Build Frontend Docker') {
+            steps {
+                script {
+                    sh "docker build -t safwenkh/front:1.0 ."
+                }
+            }
+        }
+
+        stage('Push Docker Frontend') {
+            steps {
+                script {
+                    sh 'docker login -u safwenkh -p Docker42426'
+                    sh "docker push safwenkh/reglement-front:1.0"
+                }
+            }
+        }
+
+        stage('Checkout Git for Docker Compose') {
+            steps {
+                script {
+                    git branch: 'GestionSecteurActivites',
+                    credentialsId: 'Git',
+                    url: 'https://github.com/samarcherni/DevOpsProject.git'
+                }
+            }
+        }
     stage('Docker compose') {
             steps {
                 sh 'docker compose up -d'
