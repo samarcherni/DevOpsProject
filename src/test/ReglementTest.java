@@ -35,10 +35,8 @@ public class ReglementServiceMockitoTest {
 
         // Configure mock
         when(reglementRepository.findAll()).thenReturn(reglements);
-
         // Test the service method
         List<Reglement> result = reglementService.retrieveAllReglements();
-
         // Verify the result
         assertEquals(2, result.size());
     }
@@ -47,13 +45,10 @@ public class ReglementServiceMockitoTest {
     void testAddReglement() {
         // Mock data
         Reglement reglement = new Reglement();
-
         // Configure mock
         doNothing().when(reglementRepository).save(reglement);
-
         // Test the service method
         Reglement result = reglementService.addReglement(reglement);
-
         // Verify the result
         assertEquals(reglement, result);
         verify(reglementRepository, times(1)).save(reglement);
@@ -65,13 +60,10 @@ public class ReglementServiceMockitoTest {
         Long reglementId = 1L;
         Reglement reglement = new Reglement();
         reglement.setId(reglementId);
-
         // Configure mock
         when(reglementRepository.findById(reglementId)).thenReturn(java.util.Optional.of(reglement));
-
         // Test the service method
         Reglement result = reglementService.retrieveReglement(reglementId);
-
         // Verify the result
         assertEquals(reglementId, result.getId());
     }
@@ -81,13 +73,10 @@ public class ReglementServiceMockitoTest {
         // Mock data
         Long idFacture = 1L;
         List<Reglement> reglements = Arrays.asList(new Reglement(), new Reglement());
-
         // Configure mock
         when(reglementRepository.retrieveReglementByFacture(idFacture)).thenReturn(reglements);
-
         // Test the service method
         List<Reglement> result = reglementService.retrieveReglementByFacture(idFacture);
-
         // Verify the result
         assertEquals(2, result.size());
     }
@@ -101,10 +90,8 @@ public class ReglementServiceMockitoTest {
 
         // Configure mock
         when(reglementRepository.getChiffreAffaireEntreDeuxDate(startDate, endDate)).thenReturn(chiffreAffaire);
-
         // Test the service method
         float result = reglementService.getChiffreAffaireEntreDeuxDate(startDate, endDate);
-
         // Verify the result
         assertEquals(chiffreAffaire, result);
     }
