@@ -129,13 +129,13 @@ pipeline {
                 }
             }
         }
-    post {
+
+    }
+        post {
         always {
             emailext body: '''The build $PROJECT_NAME - Build # $BUILD_NUMBER - is $BUILD_STATUS 
 
 Check console output at $BUILD_URL to view the results.''', subject: 'Build status ', to: 'sahar.mili@esprit.tn'
         }
-    }
-
     }
 }
