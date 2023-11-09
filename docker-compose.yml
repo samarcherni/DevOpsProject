@@ -16,11 +16,6 @@ services:
       - 8086:8086
     depends_on:
       - mysqldb
-    #environment:
-     # SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/achatdb?createDatabaseIfNotExist=true
-      #SPRING_DATASOURCE_USERNAME: root
-      #SPRING_DATASOURCE_PASSWORD:
-      #MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: '*'
   frontend:
     image: saharmili/reglement-front:1.0
     restart: unless-stopped
