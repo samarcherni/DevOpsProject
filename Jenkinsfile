@@ -75,6 +75,12 @@ pipeline {
         sh 'docker compose up -d --remove-orphans'
       }
     }
+      stage('Prometheus Grafana'){
+      steps{
+
+        echo 'done'
+      }
+    }        
     stage('Email Notification') {
             steps {
                 script {
