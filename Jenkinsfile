@@ -1,10 +1,10 @@
 def notifySuccess() {   
-            emailext body: "YEEEEY, The Jenkins job was successful.\n You can view the build at: ${BUILD_URL}",
+            emailext body: "GOOD, The Jenkins pipeline was successful.\n You can view the build at: ${BUILD_URL}",
                 subject: "Jenkins Job - Success",
                 to: 'chernisamar98@gmail.com'
 }
 def notifyFailure() {
-            emailext body: "OUUUPS, The Jenkins job failed.\n You can view the build at: ${BUILD_URL}",
+            emailext body: "OUUUPS, The Jenkins job pipeline failed.\n You can view the build at: ${BUILD_URL}",
                 subject: "Jenkins Job - Failure",
                 to: 'chernisamar98@gmail.com'
         }
