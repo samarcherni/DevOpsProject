@@ -1,3 +1,16 @@
+def notifySuccess() {   
+            emailext body: "YEEEEY, The Jenkins job was successful.
+                subject: "Jenkins Job - Success",
+                to: 'chernisamar98@gmail.com'
+}
+
+def notifyFailure() {
+            emailext body: "OUUUPS, The Jenkins job failed.
+                subject: "Jenkins Job - Failure",
+                to: 'chernisamar98@gmail.com'
+        }
+
+
 pipeline {
   agent any
 
@@ -63,6 +76,12 @@ pipeline {
         sh 'docker compose up -d --remove-orphans'
       }
     }
-      
+    stage('Email Notification') {
+            steps {
+                script {
+                    currentBuild.resultIsBetterOrEqualTo('SUCCESS') ? notifySuccess() : notifyFailure()
+                }
+            }
+        }
 }
 }
