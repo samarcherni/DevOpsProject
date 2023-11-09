@@ -78,7 +78,7 @@ pipeline {
       stage('Prometheus Grafana'){
       steps{
 
-        echo 'done'
+        echo 'donee'
       }
     }        
     stage('Email Notification') {
