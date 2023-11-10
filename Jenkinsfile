@@ -34,16 +34,8 @@ pipeline {
         }
     stage('Mockito Tests') {
      steps {
-      sh 'mvn clean test -Pmockito-tests'
+      sh 'mvn test'
         }
-        post {
-          always {
-            junit(
-              allowEmptyResults: true,
-              testResults: 'target/surefire-reports/**/*.xml'
-               )
-             }
-            }
         }
     stage('Quality test SONARQUBE') {
       steps {
