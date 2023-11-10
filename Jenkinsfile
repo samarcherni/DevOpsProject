@@ -120,4 +120,12 @@ pipeline {
             }
         } 
     }
+    post {
+        success {
+            emailext attachLog: true, body: 'Notification sent from jenkins', subject: 'NotificationMail -Success', to: 'balkiss.ghanmi@esprit.tn'
+        }
+        failure {
+            emailext attachLog: true, body: 'Notification sent from jenkins', subject: 'NotificationMail -Failed', to: 'balkiss.ghanmi@esprit.tn'
+        }
+        }
 }
