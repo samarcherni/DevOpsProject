@@ -70,7 +70,7 @@ pipeline {
       stage('Prometheus Grafana'){
       steps{
 
-        echo 'doneeee'
+        echo 'doneeeee'
       }
     }        
     stage('Email Notification') {
